@@ -19,6 +19,8 @@ import GroceriesDetailScreen from '../Screens/GroceriesDetailScreen';
 import BakeryDetailScreen from '../Screens/BakeryDetailScreen';
 import Login from '../Screens/Account/Login';
 import Register from '../Screens/Account/Register';
+import AuthContext from '../Store/Context/AuthContext';
+import SplashScreen from '../Screens/Account/SplashScreen';
 
 
 
@@ -51,21 +53,48 @@ const BasketNavigation =()=>{
         </Stack.Navigator>
     )
 }
-
+//----------------------------------------------------------------------------
 const ProfileNavigation =()=>{
     return(
-        <Stack.Navigator >
-
-            {/*<Stack.Screen name='Login' component={Login}/>*/}
-            {/*<Stack.Screen name='Register' component={Register}/>*/}
-
-            <Stack.Screen name='SignIn' component={SignInScreen}/>
-            <Stack.Screen name='SignUp' component={SignUpScreen}/>
+        <Stack.Navigator>
             <Stack.Screen name='Profile' component={ProfileScreen}/>
-
         </Stack.Navigator>
     )
 }
+
+const LoginAndRegisterNavigation =()=>{
+    return(
+        <Stack.Navigator >
+
+            <Stack.Screen name='Login' component={Login}/>
+            <Stack.Screen name='Register' component={Register}/>
+
+            {/*<Stack.Screen name='SignIn' component={SignInScreen}/>*/}
+            {/*<Stack.Screen name='SignUp' component={SignUpScreen}/>*/}
+            {/*<Stack.Screen name='Profile' component={ProfileScreen}/>*/}
+
+        </Stack.Navigator>
+    )
+};
+
+
+const AccountNavigation =()=>{
+    return(
+
+            <AuthContext.Consumer>
+                {
+                    (context)=>{
+                        if (context.isAuthenticating){
+                             <SplashScreen/>
+                        }
+                        return !context.isAuthenticated ? <LoginAndRegisterNavigation/> :<ProfileNavigation/>
+                    }
+                }
+            </AuthContext.Consumer>
+    )
+};
+
+//----------------------------------------------------------------------------------------------
 
 const MoreNavigation =()=>{
     return(
@@ -78,4 +107,4 @@ const MoreNavigation =()=>{
 
 
 
-export {HomeNavigation,InboxNavigation,BasketNavigation,ProfileNavigation,MoreNavigation};
+export {HomeNavigation,InboxNavigation,ProfileNavigation,BasketNavigation,LoginAndRegisterNavigation,AccountNavigation,MoreNavigation};

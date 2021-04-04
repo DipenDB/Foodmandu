@@ -1,11 +1,13 @@
 
 
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, StyleSheet, StatusBar, Image, TextInput, TouchableOpacity} from 'react-native';
 import * as yup from 'yup';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 import {Formik} from 'formik';
 import Color from '../../Assets/Colors';
+import AuthContext from '../../Store/Context/AuthContext';
+
 
 const validationSchema=yup.object().shape({
     email: yup.string().required().email().label('Email'),    //label for error name Capitalization
@@ -17,6 +19,8 @@ const validationSchema=yup.object().shape({
 
 
 const Register=(props)=>{
+    const authContext =useContext(AuthContext);
+
     return(
         <View style={styles.container}>
             <KeyboardAwareScrollView style={{flex: 1, width:'100%'}}
@@ -28,7 +32,18 @@ const Register=(props)=>{
 
                 <Formik
                     initialValues={{email:'',password:'',name:'',address:'',phone:''}}
-                    onSubmit={values=>console.log(values)}
+
+                    onSubmit={(values)=>{
+                        // console.log(values.email)
+                        const auth = authContext.signUpUserWithFirebase({
+                            name:values.name,
+                            address:values.address,
+                            phone:values.phone,
+                            email:values.email,
+                            password:values.password,
+                        })
+                        props.navigation.navigate('Login')
+                    }}
                     validationSchema={validationSchema}
                 >
                     {({handleChange,handleBlur,handleSubmit,errors,setFieldTouched,touched})=>(
@@ -42,7 +57,8 @@ const Register=(props)=>{
                                 autocapitalize='none'
 
 
-                                textContentType='name'
+                                // textContentType='name'
+                                // textContentType='familyName'
                                 onBlur={()=>setFieldTouched('name')}
 
                                 onChangeText={handleChange('name')}
@@ -61,7 +77,7 @@ const Register=(props)=>{
 
 
 
-                                textContentType='address'
+                                // textContentType='fullStreetAddress'
                                 onBlur={()=>setFieldTouched('address')}
 
                                 onChangeText={handleChange('address')}
@@ -81,7 +97,7 @@ const Register=(props)=>{
 
 
 
-                                textContentType='phone'
+                                // textContentType='telephoneNumber'
                                 onBlur={()=>setFieldTouched('phone')}
 
                                 onChangeText={handleChange('phone')}
@@ -101,7 +117,7 @@ const Register=(props)=>{
                                 autocapitalize='none'
                                 keyboardType='email-address'
 
-                                textContentType='emailAddress'
+                                // textContentType='emailAddress'
                                 onBlur={()=>setFieldTouched('email')}
 
                                 onChangeText={handleChange('email')}
@@ -120,7 +136,7 @@ const Register=(props)=>{
                                 secureTextEntry
 
 
-                                textContentType='password'
+                                // textContentType='password'
                                 onBlur={()=>setFieldTouched('password')}
 
                                 onChangeText={handleChange('password')}
@@ -132,9 +148,11 @@ const Register=(props)=>{
 
 
 
-                            <TouchableOpacity style={styles.button} onPress={{handleSubmit}}>
+                            <TouchableOpacity type="submit" style={styles.button} onPress={handleSubmit}>
                                 <Text style={styles.buttonTitle}>Create</Text>
                             </TouchableOpacity>
+
+                            {/*<button type="submit">Submit</button>*/}
 
                             <View style={styles.footerView}>
                                 <Text style={styles.footerText}>Don't have an account? <Text onPress={()=>props.navigation.navigate('Login')} style={styles.footerLink}>Login</Text></Text>

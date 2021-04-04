@@ -13,22 +13,32 @@ class AuthProvider extends React.Component{
         isAuthenticated :false,
         isAuthenticating : false,
         error:false,
+        errorMessage :"",
     }
 
 
-    // componentDidMount=()=>{
-    //     this.setAuthenticating(true)
-    //
-    //     setTimeout(()=>{
-    //         this.setAuthenticated(false);
-    //         this.setAuthenticating(false);
-    //     },5000)
-    //
-    // }
+    componentDidMount=async ()=>{
+        // await AsyncStorage.removeItem("users")
+        // await AsyncStorage.removeItem("authenticated")
+
+
+
+        this.setAuthenticating(true)
+        const auth=await AsyncStorage.getItem('authenticated')
+        console.log(auth)
+
+        if (!auth){
+            this.setAuthenticated(false)
+        }else {
+            this.setAuthenticated(true)
+            this.setAuthUser(JSON.parse(auth))
+        }
+        this.setAuthenticating(false)
+    }
 
 
     signUpUserWithFirebase = async (user)=>{
-        // console.log(user)
+        console.log(user)
         try {
             const userRes = await axios.post(`${BASE_URL}/users.json`,user)
         }
@@ -38,49 +48,80 @@ class AuthProvider extends React.Component{
     }
 
 
-    loginWithFirebase =async (email,password)=>{
-        console.log(email);
-        console.log(password);
+    loginWithFirebase =async (user)=>{
+        console.log({email: user.email, password: user.password})
+        // console.log(user.email,user.password);
 
-        // try {
-        //     const allUser = await axios.get(`${BASE_URL}/users.json`);
-        //     console.log(allUser.data)
-        //
-        //     const userId = Object.keys(allUser.data)
-        //     const users = userId.map(userId=>{
-        //         return{
-        //             ...allUser.data[userId],
-        //             id:userId
-        //         }
-        //     })
-        //
-        //     console.log(users)
-        //
-        //     const loginUser = users.find(user=>user.email===email)
-        //     var err ="";
-        //
-        //     if (loginUser){
-        //         console.log("User with given mail exist")
-        //         if (loginUser.password !==password){
-        //             err="Email and Password don't match";
-        //         }
-        //         else {
-        //             err="Email and Password match"
-        //         }
-        //     }
-        //     else {
-        //         err="User with given email doesn't exist"
-        //     }
-        //     this.setState({
-        //         ...this.state,
-        //
-        //     })
-        // }
-        // catch (e){
-        //     console.log(e)
-        // }
+        try {
+            this.setAuthenticating(true)
+            const allUser=  await axios.get(`${BASE_URL}/users.json`)
+            // console.log(allUser.data)
+
+            const userId =Object.keys(allUser.data)
+            const users =userId.map(userId=>{
+                return{
+                    ...allUser.data[userId],
+                    id:userId
+                }
+            })
+            console.log(users);
+
+            // const Total = JSON.parse('users')
+
+            // console.log(Total['email']);
+
+            const loginUser = users.find(u=>u.email===user.email)
+            var err ="";
+            // console.log(loginUser)
+
+            if (loginUser){
+                        if (loginUser.password===user.password){
+                            // console.log(JSON.stringify(loginUser))
+                            await AsyncStorage.setItem('authenticated', JSON.stringify(loginUser));
+                            this.setAuthUser(JSON.stringify(loginUser));
+                            this.setAuthenticated(true);
+                            this.setAuthError(false)
+                            this.setState({
+                                ...this.state,
+                                errorMessage:"",
+                            })
+                        }else {
+                            this.setAuthenticated(false);
+                            err="Email and Password didn't match";
+                        }
+                    }
+                    else {
+                        err="Email and Password did not match";
+                    }
+                    this.setState({
+                        ...this.state,
+                        errorMessage:err
+                    })
+                }catch (e){
+                    console.log(e);
+                    this.setAuthenticated(false)
+                    this.setState({
+                        ...this.state,
+                        errorMessage:"Internet Problem!"
+                    })
+                }
+                finally {
+                    this.setAuthenticating(false)
+                }
     }
 
+
+    
+    logOut=async ()=>{
+        await AsyncStorage.removeItem('authenticated');
+        this.setAuthenticated(false)
+        this.setAuthUser({})
+        this.setAuthError(false)
+        this.setState({
+            ...this.state,
+            errorMessage:'',
+        })
+    }
 
 
 
@@ -129,6 +170,7 @@ class AuthProvider extends React.Component{
 
                  signUpUserWithFirebase:this.signUpUserWithFirebase,
                  loginWithFirebase:this.loginWithFirebase,
+                 logOut:this.logOut,
 
 
              }}>

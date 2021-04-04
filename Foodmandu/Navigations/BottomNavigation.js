@@ -13,12 +13,14 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
 import Colors from '../../MyApp/Assets/Colors';
 import {
+    AccountNavigation,
     BasketNavigation,
     HomeNavigation,
     InboxNavigation,
     MoreNavigation,
     ProfileNavigation,
 } from './StackNavigation';
+import AuthContext from '../Store/Context/AuthContext';
 
 
 const BottomTab =createBottomTabNavigator();
@@ -31,6 +33,9 @@ const BottomNavigation =()=>{
                     activeTintColor: Color.red,
 
                 }}>
+
+
+
 
                 <BottomTab.Screen name="Home" component={HomeNavigation}
                                   options={{
@@ -74,7 +79,20 @@ const BottomNavigation =()=>{
                                       }
 
                                   }}/>
-                <BottomTab.Screen name="MY PROFILE" component={ProfileNavigation}
+                {/*<BottomTab.Screen name="Account" component={AccountNavigation}*/}
+                {/*                  options={{*/}
+                {/*                      tabBarLabel:"",*/}
+                {/*                      tabBarIcon:({focused,color,size})=>{*/}
+
+                {/*                          if(focused){*/}
+                {/*                              return <Icon name="account-details-outline" size={29} color='red' />*/}
+                {/*                          }*/}
+                {/*                          return <Icon name="account-details-outline" size={25} color={Color.black} />*/}
+
+                {/*                      }*/}
+
+                {/*                  }}/>*/}
+                                  <BottomTab.Screen name="Account" component={AccountNavigation}
                                   options={{
                                       tabBarLabel:"",
                                       tabBarIcon:({focused,color,size})=>{

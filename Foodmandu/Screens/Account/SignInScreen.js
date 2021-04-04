@@ -7,6 +7,9 @@ import Color from '../../Assets/Colors'
 import AuthContext from '../../Store/Context/AuthContext';
 
 
+
+
+
 const SignInScreen=(props)=>{
 
     React.useLayoutEffect(()=>{props.navigation.setOptions({title: "Login"})})
@@ -16,6 +19,12 @@ const SignInScreen=(props)=>{
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     const authContext  = useContext(AuthContext);
+
+
+    const handleSignIn=()=>{
+        const auth = authContext.loginWithFirebase(email,password)
+    }
+
 
 
 
@@ -34,8 +43,10 @@ const SignInScreen=(props)=>{
                 onChangeText={text => setPassword(text)}
                 style={{marginBottom:20,}}
             />
-            {/*<Button mode="contained" onPress={authContext.loginWithFirebase(email,password)}>*/}
-            <Button mode="contained" onPress={()=>console.log("Pressed")}>
+
+            {authContext.errorMessage!=='' && <Text style={{color:'red'}}>{authContext.errorMessage}</Text>}
+            <Button mode="contained" onPress={handleSignIn}>
+            {/*<Button mode="contained" onPress={()=>console.log("Pressed")}>*/}
                 Login
             </Button>
 

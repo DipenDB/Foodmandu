@@ -1,12 +1,14 @@
 
 
-import React from 'react';
+import React, {useContext} from 'react';
 import {View,Text,StyleSheet,StatusBar,Image,TextInput,TouchableOpacity} from 'react-native';
 import {KeyboardAwareScrollView} from "react-native-keyboard-aware-scrollview";
 import {Form, Item, Input,Button, Label } from 'native-base';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import Color from '../../Assets/Colors'
+import AuthContext from '../../Store/Context/AuthContext';
+
 
 
 
@@ -17,6 +19,8 @@ const validationSchema=yup.object().shape({
 
 
 const Login=(props)=>{
+    const authContext  = useContext(AuthContext);
+
     return(
         <View style={styles.container}>
             <KeyboardAwareScrollView style={{flex: 1, width:'100%'}}
@@ -28,7 +32,12 @@ const Login=(props)=>{
 
                 <Formik
                     initialValues={{email:'',password:''}}
-                    onSubmit={values=>console.log(values)}
+                    onSubmit={(values)=>{
+                        const auth = authContext.loginWithFirebase({
+                            email:values.email,
+                            password:values.password,
+                        })
+                    }}
                     validationSchema={validationSchema}
                 >
                     {({handleChange,handleBlur,handleSubmit,errors,setFieldTouched,touched})=>(
@@ -61,7 +70,6 @@ const Login=(props)=>{
                                 autocapitalize='none'
                                 secureTextEntry
 
-
                                 textContentType='password'
                                 onBlur={()=>setFieldTouched('password')}
 
@@ -74,8 +82,8 @@ const Login=(props)=>{
 
 
 
-
-                            <TouchableOpacity style={styles.button} onPress={{handleSubmit}}>
+                            {authContext.errorMessage!=='' && <Text style={{color:'red'}}>{authContext.errorMessage}</Text>}
+                            <TouchableOpacity style={styles.button} onPress={handleSubmit}>
                                 <Text style={styles.buttonTitle}>Log in</Text>
                             </TouchableOpacity>
 
