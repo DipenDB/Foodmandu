@@ -5,44 +5,48 @@ import {View, Text, StyleSheet, StatusBar, Image, TextInput, TouchableOpacity} f
 import * as yup from 'yup';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 import {Formik} from 'formik';
-import Color from '../../Assets/Colors';
-import AuthContext from '../../Store/Context/AuthContext';
-
+import Color from '../Assets/Colors';
+import AuthContext from '../Store/Context/AuthContext';
 
 const validationSchema=yup.object().shape({
     email: yup.string().required().email().label('Email'),    //label for error name Capitalization
     password:yup.string().required().min(5).label('Password'),
-    name:yup.string().required().min(1).label('Name'),
-    address:yup.string().required().min(2).label('Address'),
+    name:yup.string().required().min(5).label('Name'),
+    address:yup.string().required().min(5).label('Address'),
     phone:yup.string().required().min(10).label('Phone'),
 });
 
 
-const Register=(props)=>{
+const EditScreen=(props)=>{
     const authContext =useContext(AuthContext);
-
     return(
         <View style={styles.container}>
             <KeyboardAwareScrollView style={{flex: 1, width:'100%'}}
                                      keyboardShouldPersistTaps='always'>
                 <Image
                     style={styles.logo}
-                    source={require('../../Assets/foodmandu.jpg')}
+                    source={require('../Assets/foodmandu.jpg')}
                 />
 
                 <Formik
-                    initialValues={{email:'',password:'',name:'',address:'',phone:''}}
+                    initialValues={{
+                        email:authContext.authUser.name,
+                        password:authContext.authUser.name,
+                        name:authContext.authUser.name,
+                        address:authContext.authUser.name,
+                        phone:authContext.authUser.name
+                    }}
 
                     onSubmit={(values)=>{
-                        // console.log(values.email)
-                        const auth = authContext.signUpUserWithFirebase({
-                            name:values.name,
-                            address:values.address,
-                            phone:values.phone,
-                            email:values.email,
-                            password:values.password,
-                        })
-                        props.navigation.navigate('Login')
+                        console.log(values.email)
+                        // const auth = authContext.signUpUserWithFirebase({
+                        //     name:values.name,
+                        //     address:values.address,
+                        //     phone:values.phone,
+                        //     email:values.email,
+                        //     password:values.password,
+                        // })
+                        // props.navigation.navigate('Login')
                     }}
                     validationSchema={validationSchema}
                 >
@@ -229,9 +233,7 @@ const styles = StyleSheet.create({
         marginTop: 20
     },
 });
-
-
-export default Register;
+export default EditScreen;
 
 
 

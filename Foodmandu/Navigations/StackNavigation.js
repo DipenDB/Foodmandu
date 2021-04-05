@@ -1,5 +1,6 @@
 
 import React from 'react';
+import {Button,Text,View} from 'react-native'
 
 import {createStackNavigator} from '@react-navigation/stack';
 import Color from '../Assets/Colors'
@@ -9,7 +10,7 @@ import BasketScreen from '../Screens/ButtonTabs/BasketScreen';
 import AccountScreen from '../Screens/ButtonTabs/AccountSccreen';
 import MoreScreen from '../Screens/ButtonTabs/MoreScreen';
 import BottomNavigation from './BottomNavigation';
-import AllRestaurant from '../Components/Restaurant/AllRestaurant';
+import AllRestaurant from '../Components/CategoryProductList/AllRestaurant';
 import ProductDetailScreen from '../Screens/ProductDetailScreen';
 import RestaurantDetailScreen from '../Screens/RestaurantDetailScreen';
 import SignUpScreen from '../Screens/Account/SignUpScreen';
@@ -21,6 +22,10 @@ import Login from '../Screens/Account/Login';
 import Register from '../Screens/Account/Register';
 import AuthContext from '../Store/Context/AuthContext';
 import SplashScreen from '../Screens/Account/SplashScreen';
+import EditScreen from '../Screens/EditScreen';
+import AllGroceries from '../Components/CategoryProductList/AllGroceries';
+import AllBakeries from '../Components/CategoryProductList/AllBakeries';
+import AddRestaurant from '../Components/AddProductScreens/AddRestaurant';
 
 
 
@@ -30,7 +35,12 @@ const HomeNavigation =()=>{
     return(
             <Stack.Navigator>
                 <Stack.Screen name='Home' component={HomeScreen} options={{headerShown:false}}/>
-                <Stack.Screen name='Restaurant' component={AllRestaurant} />
+                <Stack.Screen name='Restaurant' component={AllRestaurant}/>
+                <Stack.Screen name='Groceries' component={AllGroceries} />
+                <Stack.Screen name='Bakeries' component={AllBakeries} />
+
+                <Stack.Screen name='AddRestaurant' component={AddRestaurant} />
+
                 <Stack.Screen name='ProductDetail' component={ProductDetailScreen} />
                 <Stack.Screen name='RestaurantDetail' component={RestaurantDetailScreen} />
                 <Stack.Screen name='GroceryDetail' component={GroceriesDetailScreen} />
@@ -58,6 +68,8 @@ const ProfileNavigation =()=>{
     return(
         <Stack.Navigator>
             <Stack.Screen name='Profile' component={ProfileScreen}/>
+            <Stack.Screen name='Edit' component={EditScreen}/>
+
         </Stack.Navigator>
     )
 }

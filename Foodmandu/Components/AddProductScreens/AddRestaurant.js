@@ -3,23 +3,25 @@
 import React, {useContext} from 'react';
 import {View, Text, StyleSheet, StatusBar, Image, TextInput, TouchableOpacity} from 'react-native';
 import * as yup from 'yup';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 import {Formik} from 'formik';
 import Color from '../../Assets/Colors';
 import AuthContext from '../../Store/Context/AuthContext';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 
 
 const validationSchema=yup.object().shape({
-    email: yup.string().required().email().label('Email'),    //label for error name Capitalization
-    password:yup.string().required().min(5).label('Password'),
-    name:yup.string().required().min(1).label('Name'),
-    address:yup.string().required().min(2).label('Address'),
-    phone:yup.string().required().min(10).label('Phone'),
+    name:yup.string().required().min(2).label('Restaurant Name'),
+    city: yup.string().required().label('City'),    //label for error name Capitalization
+    address:yup.string().required().min(3).label('Address'),
+    opening:yup.string().required().label('Opening Time'),
+    image:yup.string().required().label('Image Link'),
+
 });
 
 
-const Register=(props)=>{
+const AddRestaurant=(props)=>{
     const authContext =useContext(AuthContext);
+    React.useLayoutEffect(()=>{props.navigation.setOptions({title: "Add Restaurant"})})
 
     return(
         <View style={styles.container}>
@@ -31,18 +33,18 @@ const Register=(props)=>{
                 />
 
                 <Formik
-                    initialValues={{email:'',password:'',name:'',address:'',phone:''}}
+                    initialValues={{name:'',city:'',address:'',opening:'',image:''}}
 
                     onSubmit={(values)=>{
                         // console.log(values.email)
-                        const auth = authContext.signUpUserWithFirebase({
+                        const auth = authContext.addRestaurantData({
                             name:values.name,
+                            city:values.city,
                             address:values.address,
-                            phone:values.phone,
-                            email:values.email,
-                            password:values.password,
+                            opening:values.opening,
+                            image:values.image,
                         })
-                        props.navigation.navigate('Login')
+                        props.navigation.navigate('Restaurant')
                     }}
                     validationSchema={validationSchema}
                 >
@@ -51,14 +53,11 @@ const Register=(props)=>{
 
                             <TextInput
                                 style={styles.input}
-                                placeholder='Name'
+                                placeholder='Restaurant Name'
                                 placeholderTextColor='#aaa'
                                 underlineColorAndroid='transparent'
                                 autocapitalize='none'
 
-
-                                // textContentType='name'
-                                // textContentType='familyName'
                                 onBlur={()=>setFieldTouched('name')}
 
                                 onChangeText={handleChange('name')}
@@ -89,18 +88,18 @@ const Register=(props)=>{
 
                             <TextInput
                                 style={styles.input}
-                                placeholder='Phone'
+                                placeholder='City'
                                 placeholderTextColor='#aaa'
                                 underlineColorAndroid='transparent'
                                 autocapitalize='none'
-                                keyboardType='number-pad'
+                                // keyboardType='number-pad'
 
 
 
                                 // textContentType='telephoneNumber'
-                                onBlur={()=>setFieldTouched('phone')}
+                                onBlur={()=>setFieldTouched('city')}
 
-                                onChangeText={handleChange('phone')}
+                                onChangeText={handleChange('city')}
 
                             />
 
@@ -111,16 +110,16 @@ const Register=(props)=>{
 
                             <TextInput
                                 style={styles.input}
-                                placeholder='Email'
+                                placeholder='Opening Time'
                                 placeholderTextColor='#aaa'
                                 underlineColorAndroid='transparent'
                                 autocapitalize='none'
                                 keyboardType='email-address'
 
                                 // textContentType='emailAddress'
-                                onBlur={()=>setFieldTouched('email')}
+                                onBlur={()=>setFieldTouched('opening')}
 
-                                onChangeText={handleChange('email')}
+                                onChangeText={handleChange('opening')}
 
                             />
 
@@ -129,17 +128,17 @@ const Register=(props)=>{
 
                             <TextInput
                                 style={styles.input}
-                                placeholder='Password'
+                                placeholder='Image Link'
                                 placeholderTextColor='#aaa'
                                 underlineColorAndroid='transparent'
                                 autocapitalize='none'
-                                secureTextEntry
+                                // secureTextEntry
 
 
                                 // textContentType='password'
-                                onBlur={()=>setFieldTouched('password')}
+                                onBlur={()=>setFieldTouched('image')}
 
-                                onChangeText={handleChange('password')}
+                                onChangeText={handleChange('image')}
 
                             />
 
@@ -149,13 +148,13 @@ const Register=(props)=>{
 
 
                             <TouchableOpacity type="submit" style={styles.button} onPress={handleSubmit}>
-                                <Text style={styles.buttonTitle}>Create</Text>
+                                <Text style={styles.buttonTitle}>Add Restaurant</Text>
                             </TouchableOpacity>
 
                             {/*<button type="submit">Submit</button>*/}
 
                             <View style={styles.footerView}>
-                                <Text style={styles.footerText}>Don't have an account? <Text onPress={()=>props.navigation.navigate('Login')} style={styles.footerLink}>Login</Text></Text>
+                                <Text style={styles.footerText}>Cancel <Text onPress={()=>props.navigation.goBack()} style={styles.footerLink}>Go Back</Text></Text>
                             </View>
 
 
@@ -219,7 +218,7 @@ const styles = StyleSheet.create({
         color: '#2e2e2d'
     },
     footerLink: {
-        color: "#788eec",
+        color: "green",
         fontWeight: "bold",
         fontSize: 16
     },
@@ -231,7 +230,7 @@ const styles = StyleSheet.create({
 });
 
 
-export default Register;
+export default AddRestaurant;
 
 
 

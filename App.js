@@ -22,7 +22,7 @@ import StackNavigation from './Foodmandu/Navigations/StackNavigation';
 import Navigations from './Foodmandu/Navigations/Navigations';
 
 
-const App: () => Node = () => {
+const App =() => {
 
   return (
       <PaperProvider>

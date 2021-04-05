@@ -36,6 +36,17 @@ class AuthProvider extends React.Component{
         this.setAuthenticating(false)
     }
 
+    addRestaurantData=async (restaurant)=>{
+        console.log(restaurant)
+        try {
+            const restaurant = await axios.post(`${BASE_URL}/resturants.json`,restaurant)
+        }
+        catch (e){aaa
+            console.log(e)
+        }
+
+    }
+
 
     signUpUserWithFirebase = async (user)=>{
         console.log(user)
@@ -49,7 +60,6 @@ class AuthProvider extends React.Component{
 
 
     loginWithFirebase =async (user)=>{
-        console.log({email: user.email, password: user.password})
         // console.log(user.email,user.password);
 
         try {
@@ -64,7 +74,7 @@ class AuthProvider extends React.Component{
                     id:userId
                 }
             })
-            console.log(users);
+            // console.log(users);
 
             // const Total = JSON.parse('users')
 
@@ -111,7 +121,7 @@ class AuthProvider extends React.Component{
     }
 
 
-    
+
     logOut=async ()=>{
         await AsyncStorage.removeItem('authenticated');
         this.setAuthenticated(false)
@@ -171,6 +181,9 @@ class AuthProvider extends React.Component{
                  signUpUserWithFirebase:this.signUpUserWithFirebase,
                  loginWithFirebase:this.loginWithFirebase,
                  logOut:this.logOut,
+
+
+                 addRestaurantData:this.addRestaurantData,
 
 
              }}>

@@ -10,6 +10,7 @@ const BAKERY=[
         "size":"7 inches in diameter",
         "price":42.95,
         "stock":"5",
+        "img":"https://i.ndtvimg.com/i/2017-10/bakeries_620x350_41509023137.jpg",
         "images": require("./public/images/chocolate-mousse-torte-cake.png"),
         "suggestion":["Serves 6 to 8","Ships Nationwide in Refrigerated Packaging","Certified Kof-K Kosher"],
         "allegations":["Unless otherwise noted, products contain milk, wheat, soy and egg, and were produced on equipment that processes peanuts, almonds, hazelnuts, pecans, walnuts.","Our facility is not Gluten Free."]
@@ -24,6 +25,7 @@ const BAKERY=[
         "size":"7 inches in diameter",
         "price":39.95,
         "stock":"2",
+        "img":"https://i.ndtvimg.com/i/2017-10/bakeries_620x350_41509023137.jpg",
         "images":require("./public/images/triple-chocolate-enrobed-brownie-cake.png"),
         "suggestion":["Serves 6 to 8","Certified KOF-K Kosher"],
         "allegations":["Unless otherwise noted, products contain milk, wheat, soy and egg, and were produced on equipment that processes peanuts, almonds, hazelnuts, pecans, walnuts.","Our facility is not Gluten Free."]
@@ -38,6 +40,7 @@ const BAKERY=[
         "size":"6.5 oz can",
         "price":3.19,
         "stock":"7",
+        "img":"https://i.ndtvimg.com/i/2017-10/bakeries_620x350_41509023137.jpg",
         "images":require("./public/images/reddi-wip-dairy-whipped-topping-extra-creamy-aerosol-refrigerated-1.jpg"),
         "suggestion":[" Shake it! Shake it! 4 times before use then remove cap.","Turn can completely upside down and press nozzle sideways with finger.","Rinse nozzle thoroughly with warm water. "],
         "allegations":["Contains: milk.","Deliberately concentrating and inhaling the contents can be harmful or fatal.","Contents under pressure.","Do not expose to temperatures above 120 degrees F.","Do not puncture or incinerate can.","Keep out of the reach of children.","Choking hazard, cap contains small parts."]
@@ -52,6 +55,7 @@ const BAKERY=[
         "size":"7 inches in diameter",
         "price":42.95,
         "stock":"4",
+        "img":"https://i.ndtvimg.com/i/2017-10/bakeries_620x350_41509023137.jpg",
         "images":require("./public/images/red-velvet-chocolate-cake.png"),
         "suggestion":["Serves 6 to 8","Certified KOF-K Kosher","Ships Nationwide in Refrigerated Packaging"],
         "allegations":["Unless otherwise noted, products contain milk, wheat, soy and egg, and were produced on equipment that processes peanuts, almonds, hazelnuts, pecans, walnuts.","Our facility is not Gluten Free."]
@@ -66,6 +70,7 @@ const BAKERY=[
         "size":"64 oz ctn",
         "price":5.19,
         "stock":"21",
+        "img":"https://i.ndtvimg.com/i/2017-10/bakeries_620x350_41509023137.jpg",
         "images":require("./public/images/rice-dream-original-non-dairy-beverage-organic-1.jpg"),
         "suggestion":["Shake well.","Serve chilled.","Stays fresh 7-10 days in refrigerator after opening."],
         "allegations":["Not for use as an infant formula.","For children under age 5, consult your child's doctor."]
@@ -80,6 +85,7 @@ const BAKERY=[
         "size":"12ct",
         "price":20.99,
         "stock":"3",
+        "img":"https://i.ndtvimg.com/i/2017-10/bakeries_620x350_41509023137.jpg",
         "images":require("./public/images/members-mark-mini-plain-sliced-bagels.jpg"),
         "suggestion":["Authentic New York-style kettle boiled bagels","Soft, chewy and delicious","The taste and quality you'd expect from your local bagel shop","Mini sized for snacking"],
         "allegations":[]
@@ -94,6 +100,7 @@ const BAKERY=[
         "size":"5.3 oz cup",
         "price":1.95,
         "stock":"15",
+        "img":"https://i.ndtvimg.com/i/2017-10/bakeries_620x350_41509023137.jpg",
         "images":require("./public/images/daiya-dairy-free-greek-yogurt-black-cherry-1.jpg"),
         "suggestion":["Keep refrigerated."],
         "allegations":["Contains coconut."]
@@ -108,6 +115,7 @@ const BAKERY=[
         "size":"36ct",
         "price":28.99,
         "stock":"12",
+        "img":"https://i.ndtvimg.com/i/2017-10/bakeries_620x350_41509023137.jpg",
         "images":require("./public/images/daily-chef-mini-candy-cookies.jpg"),
         "suggestion":[],
         "allegations":[]
@@ -122,6 +130,7 @@ const BAKERY=[
         "size":"5.3 oz cup",
         "price":2.09,
         "stock":"15",
+        "img":"https://i.ndtvimg.com/i/2017-10/bakeries_620x350_41509023137.jpg",
         "images":require("./public/images/so-delicious-cultured-coconut-milk-yogurt-vanilla-dairy-soy-free-organic-1.jpg"),
         "suggestion":["Keep refrigerated."],
         "allegations":["Contains coconut.","Produced in a facility that also processes other tree nuts and soy.","We apply strict quality control measures to prevent contamination by undeclared food allergens"]
@@ -136,6 +145,7 @@ const BAKERY=[
         "size":"32 pieces",
         "price":39.95,
         "stock":"2",
+        "img":"https://i.ndtvimg.com/i/2017-10/bakeries_620x350_41509023137.jpg",
         "images":require("./public/images/gastons-bakery-small-puff-pastry-squares.jpg"),
         "suggestion":[],
         "allegations":["Not available to ship to Hawaii or Alaska.","Contains wheat and milk"]
@@ -150,6 +160,7 @@ const BAKERY=[
         "size":"Large",
         "price":59.99,
         "stock":"6",
+        "img":"https://i.ndtvimg.com/i/2017-10/bakeries_620x350_41509023137.jpg",
         "images":require("./public/images/signature-bakery-assortment.jpg"),
         "suggestion":[],
         "allegations":["Unless otherwise noted, products contain milk, wheat, soy and egg, and were produced on equipment that processes peanuts, almonds, hazelnuts, pecans, walnuts.","Our facility is not Gluten Free."]
@@ -164,6 +175,7 @@ const BAKERY=[
         "size":"Set of 15",
         "price":34.95,
         "stock":"8",
+        "img":"https://i.ndtvimg.com/i/2017-10/bakeries_620x350_41509023137.jpg",
         "images":require("./public/images/gastons-bakery-croissants-1.jpg"),
         "suggestion":["15 ready-to-bake croissants"],
         "allegations":[]
@@ -178,6 +190,7 @@ const BAKERY=[
         "size":"5.3 oz cup",
         "price":1.92,
         "stock":"15",
+        "img":"https://i.ndtvimg.com/i/2017-10/bakeries_620x350_41509023137.jpg",
         "images":require("./public/images/so-delicious-cultured-coconut-milk-yogurt-vanilla-dairy-soy-free-organic-1.jpg"),
         "suggestion":["Keep refrigerated."],
         "allegations":["Contains coconut."]
@@ -192,6 +205,7 @@ const BAKERY=[
         "size":"5.6 oz box",
         "price":1,
         "stock":"102",
+        "img":"https://i.ndtvimg.com/i/2017-10/bakeries_620x350_41509023137.jpg",
         "images":require("./public/images/celeste-pizza-for-one-vegetable-frozen-1.jpg"),
         "suggestion":["Do not put microwave disk in conventional oven.","Place baking sheet on center oven rack; preheat oven to 400°F.","Remove frozen pizza from carton; unwrap."],
         "allegations":[]
@@ -206,6 +220,7 @@ const BAKERY=[
         "size":"35.3 oz can",
         "price":6.99,
         "stock":"12",
+        "img":"https://i.ndtvimg.com/i/2017-10/bakeries_620x350_41509023137.jpg",
         "images":require("./public/images/nestle-coffee-matepowder-coffee-creamer-original-1.jpg"),
         "suggestion":["Spoon Coffee-Mate into prepared coffee, tea, or cocoa.","Stir and enjoy!"],
         "allegations":["Contains: a milk derivative."]
@@ -220,6 +235,7 @@ const BAKERY=[
         "size":"32 oz ctn",
         "price":2.02,
         "stock":"1",
+        "img":"https://i.ndtvimg.com/i/2017-10/bakeries_620x350_41509023137.jpg",
         "images":require("./public/images/natures-promise-free-from-vanilla-almond-milk-refrigerated-1.jpg"),
         "suggestion":["Shake well + serve chilled.","Refrigerate after opening and use within 7-10 days."],
         "allegations":[]
@@ -234,6 +250,7 @@ const BAKERY=[
         "size":"4.4 oz box",
         "price":2.39,
         "stock":"51",
+        "img":"https://i.ndtvimg.com/i/2017-10/bakeries_620x350_41509023137.jpg",
         "images":require("./public/images/weight-watchers-smart-ones-thin-crust-pizza-pepperoni-1.jpg"),
         "suggestion":["Keep frozen.","Do not put microwave disk in conventional oven.","Open carton at perforated strip.","Remove frozen pizza from carton; unwrap."],
         "allegations":[]
@@ -248,6 +265,7 @@ const BAKERY=[
         "size":"4 ct",
         "price":7.49,
         "stock":"11",
+        "img":"https://i.ndtvimg.com/i/2017-10/bakeries_620x350_41509023137.jpg",
         "images":require("./public/images/kelloggs-special-k-flatbread-breakfast-sandwich-sausage-egg-and-cheese.jpg"),
         "suggestion":["Keep frozen."],
         "allegations":["Contains Eggs","Contains Wheat","Contains Milk Ingredients"]
@@ -262,6 +280,7 @@ const BAKERY=[
         "size":"10 ct",
         "price":3.32,
         "stock":"11",
+        "img":"https://i.ndtvimg.com/i/2017-10/bakeries_620x350_41509023137.jpg",
         "images":require("./public/images/kelloggs-eggo-chocolate-chip-waffles.jpg"),
         "suggestion":["Keep frozen."],
         "allegations":["Contains Eggs","Contains Wheat","Contains Milk Ingredients","Contains Soy"]
@@ -276,6 +295,7 @@ const BAKERY=[
         "size":"40 pcs",
         "price":4.99,
         "stock":"6",
+        "img":"https://i.ndtvimg.com/i/2017-10/bakeries_620x350_41509023137.jpg",
         "images":require("./public/images/deep-cocktail-samosa-potato-pea.jpg"),
         "suggestion":["Keep frozen."],
         "allegations":["Contains Eggs","High Spices","Contains Preservatives"]

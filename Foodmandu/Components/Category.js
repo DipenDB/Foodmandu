@@ -12,7 +12,7 @@ const Category=(props)=>{
     const renderItem =({item})=>{
 
         return(
-            <TouchableOpacity onPress={()=>props.navigation.navigate('Restaurant',{categoryId:item.id})}>
+            <TouchableOpacity onPress={()=>props.navigation.navigate(item.nav)}>
                 <View style={{alignItems: 'center',justifyContent: 'center',marginRight:20,}}>
                     <View style={[styles.categoryCircle,{backgroundColor:item.color}]}>
                         <Image
