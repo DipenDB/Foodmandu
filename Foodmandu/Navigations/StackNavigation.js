@@ -26,6 +26,7 @@ import EditScreen from '../Screens/EditScreen';
 import AllGroceries from '../Components/CategoryProductList/AllGroceries';
 import AllBakeries from '../Components/CategoryProductList/AllBakeries';
 import AddRestaurant from '../Components/AddProductScreens/AddRestaurant';
+import AddGroceries from '../Components/AddProductScreens/AddGroceries';
 
 
 
@@ -40,6 +41,7 @@ const HomeNavigation =()=>{
                 <Stack.Screen name='Bakeries' component={AllBakeries} />
 
                 <Stack.Screen name='AddRestaurant' component={AddRestaurant} />
+                <Stack.Screen name='AddGroceries' component={AddGroceries} />
 
                 <Stack.Screen name='ProductDetail' component={ProductDetailScreen} />
                 <Stack.Screen name='RestaurantDetail' component={RestaurantDetailScreen} />

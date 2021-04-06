@@ -59,7 +59,7 @@ const Login=(props)=>{
 
                             />
 
-                            {touched.email && <Text style={{color:'red',marginLeft:15,}}>{errors.email}</Text>}
+                            {touched.email && errors.email && <Text style={{color:'red',marginLeft:15,}}>{errors.email}</Text>}
 
 
                             <TextInput
@@ -77,7 +77,7 @@ const Login=(props)=>{
 
                             />
 
-                            {touched.password && <Text style={{color:'red',marginLeft:15,}}>{errors.password}</Text>}
+                            {touched.password && errors.password && <Text style={{color:'red',marginLeft:15,}}>{errors.password}</Text>}
 
 
 

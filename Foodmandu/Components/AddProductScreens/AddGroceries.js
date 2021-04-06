@@ -10,18 +10,17 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scrollview';
 
 
 const validationSchema=yup.object().shape({
-    name:yup.string().required().min(2).label('Restaurant Name'),
-    city: yup.string().required().label('City'),    //label for error name Capitalization
-    address:yup.string().required().min(3).label('Address'),
-    opening:yup.string().required().label('Opening Time'),
+    name:yup.string().required().min(2).label('Groceries Name'),
+    category: yup.string().required().min(2).label('Category'),    //label for error name Capitalization
+    type:yup.string().required().min(3).label('Type'),
+    availableQuantity:yup.string().required().min(1).label('Available Quantity'),
     image:yup.string().required().label('Image Link'),
-
 });
 
 
-const AddRestaurant=(props)=>{
+const AddGroceries=(props)=>{
     const authContext =useContext(AuthContext);
-    React.useLayoutEffect(()=>{props.navigation.setOptions({title: "Add Restaurant"})})
+    React.useLayoutEffect(()=>{props.navigation.setOptions({title: "Add Groceries"})})
 
     return(
         <View style={styles.container}>
@@ -33,18 +32,18 @@ const AddRestaurant=(props)=>{
                 />
 
                 <Formik
-                    initialValues={{name:'',city:'',address:'',opening:'',image:''}}
+                    initialValues={{name:'',category:'',type:'',availableQuantity:'',image:''}}
 
                     onSubmit={(values)=>{
                         // console.log(values.email)
-                        const auth = authContext.addRestaurantData({
+                        const auth = authContext.addGroceriesData({
                             name:values.name,
-                            city:values.city,
-                            address:values.address,
-                            opening:values.opening,
+                            category:values.category,
+                            type:values.type,
+                            availableQuantity:values.availableQuantity,
                             image:values.image,
                         })
-                        props.navigation.navigate('Restaurant')
+                        props.navigation.navigate('Groceries')
                     }}
                     validationSchema={validationSchema}
                 >
@@ -53,10 +52,10 @@ const AddRestaurant=(props)=>{
 
                             <TextInput
                                 style={styles.input}
-                                placeholder='Restaurant Name'
+                                placeholder='Groceries Name'
                                 placeholderTextColor='#aaa'
                                 underlineColorAndroid='transparent'
-                                autocapitalize='none'
+                                autocapitalize='word'
 
                                 onBlur={()=>setFieldTouched('name')}
 
@@ -69,7 +68,7 @@ const AddRestaurant=(props)=>{
 
                             <TextInput
                                 style={styles.input}
-                                placeholder='Address'
+                                placeholder='Category'
                                 placeholderTextColor='#aaa'
                                 underlineColorAndroid='transparent'
                                 autocapitalize='word'
@@ -77,53 +76,53 @@ const AddRestaurant=(props)=>{
 
 
                                 // textContentType='fullStreetAddress'
-                                onBlur={()=>setFieldTouched('address')}
+                                onBlur={()=>setFieldTouched('category')}
 
-                                onChangeText={handleChange('address')}
+                                onChangeText={handleChange('category')}
 
                             />
 
-                            {touched.address && errors.address && <Text style={{color:'red',marginLeft:15,}}>{errors.address}</Text>}
+                            {touched.category && errors.category && <Text style={{color:'red',marginLeft:15,}}>{errors.category}</Text>}
 
 
                             <TextInput
                                 style={styles.input}
-                                placeholder='City'
+                                placeholder='Type'
                                 placeholderTextColor='#aaa'
                                 underlineColorAndroid='transparent'
-                                autocapitalize='none'
+                                autocapitalize='word'
                                 // keyboardType='number-pad'
 
 
 
                                 // textContentType='telephoneNumber'
-                                onBlur={()=>setFieldTouched('city')}
+                                onBlur={()=>setFieldTouched('type')}
 
-                                onChangeText={handleChange('city')}
+                                onChangeText={handleChange('type')}
 
                             />
 
-                            {touched.city && errors.city && <Text style={{color:'red',marginLeft:15,}}>{errors.city}</Text>}
+                            {touched.type && errors.type && <Text style={{color:'red',marginLeft:15,}}>{errors.type}</Text>}
 
 
 
 
                             <TextInput
                                 style={styles.input}
-                                placeholder='Opening Time'
+                                placeholder='Available Quantity'
                                 placeholderTextColor='#aaa'
                                 underlineColorAndroid='transparent'
                                 autocapitalize='none'
-                                keyboardType='email-address'
+                                keyboardType='numeric'
 
                                 // textContentType='emailAddress'
-                                onBlur={()=>setFieldTouched('opening')}
+                                onBlur={()=>setFieldTouched('availableQuantity')}
 
-                                onChangeText={handleChange('opening')}
+                                onChangeText={handleChange('availableQuantity')}
 
                             />
 
-                            {touched.opening && errors.opening && <Text style={{color:'red',marginLeft:15,}}>{errors.opening}</Text>}
+                            {touched.availableQuantity && errors.availableQuantity && <Text style={{color:'red',marginLeft:15,}}>{errors.availableQuantity}</Text>}
 
 
                             <TextInput
@@ -148,7 +147,7 @@ const AddRestaurant=(props)=>{
 
 
                             <TouchableOpacity type="submit" style={styles.button} onPress={handleSubmit}>
-                                <Text style={styles.buttonTitle}>Add Restaurant</Text>
+                                <Text style={styles.buttonTitle}>Add Grocery</Text>
                             </TouchableOpacity>
 
                             {/*<button type="submit">Submit</button>*/}
@@ -230,7 +229,7 @@ const styles = StyleSheet.create({
 });
 
 
-export default AddRestaurant;
+export default AddGroceries;
 
 
 

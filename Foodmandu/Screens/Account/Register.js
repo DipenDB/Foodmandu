@@ -65,7 +65,7 @@ const Register=(props)=>{
 
                             />
 
-                            {touched.name && <Text style={{color:'red',marginLeft:15,}}>{errors.name}</Text>}
+                            {touched.name && errors.name && <Text style={{color:'red',marginLeft:15,}}>{errors.name}</Text>}
 
 
                             <TextInput
@@ -84,7 +84,7 @@ const Register=(props)=>{
 
                             />
 
-                            {touched.address && <Text style={{color:'red',marginLeft:15,}}>{errors.address}</Text>}
+                            {touched.address && errors.address && <Text style={{color:'red',marginLeft:15,}}>{errors.address}</Text>}
 
 
                             <TextInput
@@ -104,7 +104,7 @@ const Register=(props)=>{
 
                             />
 
-                            {touched.phone && <Text style={{color:'red',marginLeft:15,}}>{errors.phone}</Text>}
+                            {touched.phone && errors.phone && <Text style={{color:'red',marginLeft:15,}}>{errors.phone}</Text>}
 
 
 
@@ -124,7 +124,7 @@ const Register=(props)=>{
 
                             />
 
-                            {touched.email && <Text style={{color:'red',marginLeft:15,}}>{errors.email}</Text>}
+                            {touched.email && errors.email && <Text style={{color:'red',marginLeft:15,}}>{errors.email}</Text>}
 
 
                             <TextInput
@@ -143,13 +143,13 @@ const Register=(props)=>{
 
                             />
 
-                            {touched.password && <Text style={{color:'red',marginLeft:15,}}>{errors.password}</Text>}
+                            {touched.password && errors.password && <Text style={{color:'red',marginLeft:15,}}>{errors.password}</Text>}
 
 
 
 
                             <TouchableOpacity type="submit" style={styles.button} onPress={handleSubmit}>
-                                <Text style={styles.buttonTitle}>Create</Text>
+                                <Text style={styles.buttonTitle}>Register</Text>
                             </TouchableOpacity>
 
                             {/*<button type="submit">Submit</button>*/}

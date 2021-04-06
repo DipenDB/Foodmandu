@@ -15,6 +15,7 @@ class AuthProvider extends React.Component{
         error:false,
         errorMessage :"",
         allRestaurant:'',
+        allGroceries:'',
     }
 
 
@@ -47,8 +48,23 @@ class AuthProvider extends React.Component{
             }
         })
         this.setAllRestaurant(restaurants)
-        console.log(restaurants)
-    //-------------------------------------------------------------------------------------------------------------------------------------
+        // console.log(restaurants)
+        //-------------------------------------------------------------------------------------------------------------------------------------
+
+        const allGroceries = await axios.get(`${BASE_URL}/groceries.json`)
+        const groceryIds =Object.keys(allGroceries.data)
+        const groceries=groceryIds.map(groceryId=>{
+            return{
+                ...allGroceries.data[groceryId],
+                id: groceryId
+            }
+        })
+        this.setAllGroceries(groceries)
+        console.log(groceries)
+
+        //----------------------Get all groceries and save on  constant-------------------------------------------------------------------
+
+        //-------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -56,19 +72,6 @@ class AuthProvider extends React.Component{
 
 
     }
-
-    addRestaurantData=async (restaurant)=>{
-        console.log(restaurant)
-        try {
-            await axios.post(`${BASE_URL}/restaurants.json`,restaurant)
-        }
-        catch (e){
-            console.log(e)
-        }
-
-    }
-
-
 
 
     signUpUserWithFirebase = async (user)=>{
@@ -81,27 +84,6 @@ class AuthProvider extends React.Component{
         }
     }
 
-    // getAllRestaurant=async ()=>{
-    //     try {
-    //         const allRestaurant = await axios.get(`${BASE_URL}/restaurants.json`)
-    //         console.log(allRestaurant)
-    //
-    //         const restaurantId =Object.keys(allRestaurant.data)
-    //         const restaurants=restaurantId.map(restaurantId=>{
-    //             return{
-    //                 ...allRestaurant.data[restaurantId],
-    //                 id: restaurantId
-    //             }
-    //         })
-    //         this.setAllRestaurant(restaurants)
-    //
-    //         console.log(restaurants)
-    //     }
-    //     catch (e){
-    //         console.log(e)
-    //     }
-    //
-    // }
 
 
     loginWithFirebase =async (user)=>{
@@ -133,7 +115,8 @@ class AuthProvider extends React.Component{
                         if (loginUser.password===user.password){
                             // console.log(JSON.stringify(loginUser))
                             await AsyncStorage.setItem('authenticated', JSON.stringify(loginUser));
-                            this.setAuthUser(JSON.stringify(loginUser));
+                            // this.setAuthUser(JSON.stringify(loginUser));
+                            await this.loadUser()     // To remove error of not loading user info after login on Profile
                             this.setAuthenticated(true);
                             this.setAuthError(false)
                             this.setState({
@@ -165,6 +148,11 @@ class AuthProvider extends React.Component{
                 }
     }
 
+    loadUser = async ()=>{
+        const user =JSON.parse(await  AsyncStorage.getItem('authenticated'))
+        this.setAuthUser(user)
+    }
+
 
 
     logOut=async ()=>{
@@ -178,6 +166,32 @@ class AuthProvider extends React.Component{
         })
     }
 
+    addRestaurantData=async (restaurant)=>{
+        console.log(restaurant)
+        try {
+            await axios.post(`${BASE_URL}/restaurants.json`,restaurant)
+        }
+        catch (e){
+            console.log(e)
+        }
+
+    }
+
+    addGroceriesData=async (grocery)=>{
+        console.log(grocery)
+        try {
+            await axios.post(`${BASE_URL}/groceries.json`,grocery)
+        }
+        catch (e){
+            console.log(e)
+        }
+
+    }
+
+
+
+
+
     setAllRestaurant=(restaurant) =>{
         this.setState({
             ...this.state,
@@ -185,6 +199,12 @@ class AuthProvider extends React.Component{
         })
     }
 
+    setAllGroceries=(grocery) =>{
+        this.setState({
+            ...this.state,
+            allGroceries: grocery
+        })
+    }
 
     setAuthUser=(user) =>{
         this.setState({
@@ -227,7 +247,9 @@ class AuthProvider extends React.Component{
                  setAuthenticated:this.setAuthenticated,
                  setAuthenticating:this.setAuthenticating,
                  setAuthError:this.setAuthError,
+
                  setAllRestaurant:this.setAllRestaurant,
+                 setAllGroceries:this.setAllGroceries,
 
                  signUpUserWithFirebase:this.signUpUserWithFirebase,
                  loginWithFirebase:this.loginWithFirebase,
@@ -235,6 +257,7 @@ class AuthProvider extends React.Component{
 
 
                  addRestaurantData:this.addRestaurantData,
+                 addGroceriesData:this.addGroceriesData,
 
 
              }}>
