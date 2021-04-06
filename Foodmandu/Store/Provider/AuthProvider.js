@@ -14,6 +14,7 @@ class AuthProvider extends React.Component{
         isAuthenticating : false,
         error:false,
         errorMessage :"",
+        allRestaurant:'',
     }
 
 
@@ -34,18 +35,40 @@ class AuthProvider extends React.Component{
             this.setAuthUser(JSON.parse(auth))
         }
         this.setAuthenticating(false)
+
+
+        //----------------------Get all restaurant and save on  constant-------------------------------------------------------------------
+        const allRestaurant = await axios.get(`${BASE_URL}/restaurants.json`)
+        const restaurantId =Object.keys(allRestaurant.data)
+        const restaurants=restaurantId.map(restaurantId=>{
+            return{
+                ...allRestaurant.data[restaurantId],
+                id: restaurantId
+            }
+        })
+        this.setAllRestaurant(restaurants)
+        console.log(restaurants)
+    //-------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
     }
 
     addRestaurantData=async (restaurant)=>{
         console.log(restaurant)
         try {
-            const restaurant = await axios.post(`${BASE_URL}/resturants.json`,restaurant)
+            await axios.post(`${BASE_URL}/restaurants.json`,restaurant)
         }
-        catch (e){aaa
+        catch (e){
             console.log(e)
         }
 
     }
+
+
 
 
     signUpUserWithFirebase = async (user)=>{
@@ -57,6 +80,28 @@ class AuthProvider extends React.Component{
             console.log(e)
         }
     }
+
+    // getAllRestaurant=async ()=>{
+    //     try {
+    //         const allRestaurant = await axios.get(`${BASE_URL}/restaurants.json`)
+    //         console.log(allRestaurant)
+    //
+    //         const restaurantId =Object.keys(allRestaurant.data)
+    //         const restaurants=restaurantId.map(restaurantId=>{
+    //             return{
+    //                 ...allRestaurant.data[restaurantId],
+    //                 id: restaurantId
+    //             }
+    //         })
+    //         this.setAllRestaurant(restaurants)
+    //
+    //         console.log(restaurants)
+    //     }
+    //     catch (e){
+    //         console.log(e)
+    //     }
+    //
+    // }
 
 
     loginWithFirebase =async (user)=>{
@@ -133,7 +178,12 @@ class AuthProvider extends React.Component{
         })
     }
 
-
+    setAllRestaurant=(restaurant) =>{
+        this.setState({
+            ...this.state,
+            allRestaurant: restaurant
+        })
+    }
 
 
     setAuthUser=(user) =>{
@@ -177,6 +227,7 @@ class AuthProvider extends React.Component{
                  setAuthenticated:this.setAuthenticated,
                  setAuthenticating:this.setAuthenticating,
                  setAuthError:this.setAuthError,
+                 setAllRestaurant:this.setAllRestaurant,
 
                  signUpUserWithFirebase:this.signUpUserWithFirebase,
                  loginWithFirebase:this.loginWithFirebase,

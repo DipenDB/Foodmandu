@@ -1,6 +1,6 @@
 
 
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, StyleSheet, Image, FlatList,TouchableOpacity} from 'react-native';
 import Color from '../../Assets/Colors'
 import Colors from '../../../MyApp/Assets/Colors';
@@ -10,11 +10,12 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Swipeable from 'react-native-gesture-handler/Swipeable';
-
+import AuthContext from '../../Store/Context/AuthContext';
 
 
 
 const AllRestaurant=(props)=>{
+    const authContext =useContext(AuthContext)
     React.useLayoutEffect(()=>{props.navigation.setOptions({title: "All Restaurant"})})
 
 
@@ -33,16 +34,17 @@ const AllRestaurant=(props)=>{
                             <Image
                                 style={styles.image}
                                 source={{
-                                    uri: item.img,
+                                    // uri: item.img,
+                                    uri: item.image,
                                 }}
                             />
 
 
                             <View style={{marginLeft:10,}}>
                                 <Text style={styles.title} numberOfLines={1}>{item.name}</Text>
-                                <Text style={styles.subTitle} numberOfLines={1}>{item.neighborhood} City</Text>
+                                <Text style={styles.subTitle} numberOfLines={1}>{item.city} City</Text>
                                 <Text style={styles.subTitle} numberOfLines={2}><Text style={{color:'blue'}}>{item.address}</Text></Text>
-                                <Text style={styles.subTitle} numberOfLines={1}>Opening :<Text style={{color:'green'}}>{item.opening_time}</Text></Text>
+                                <Text style={styles.subTitle} numberOfLines={1}>Opening :<Text style={{color:'green'}}>{item.opening}</Text></Text>
                             </View>
 
 
@@ -63,7 +65,7 @@ const AllRestaurant=(props)=>{
 
 
             <FlatList
-                data={Restaurant}
+                data={authContext.allRestaurant}
                 // horizontal
                  showsVerticalScrollIndicator={false}
                 keyExtractor={item => item.id}
