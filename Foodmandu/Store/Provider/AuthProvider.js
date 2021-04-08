@@ -51,6 +51,9 @@ class AuthProvider extends React.Component{
         // console.log(restaurants)
         //-------------------------------------------------------------------------------------------------------------------------------------
 
+
+
+        //----------------------Get all groceries and save on  constant-------------------------------------------------------------------
         const allGroceries = await axios.get(`${BASE_URL}/groceries.json`)
         const groceryIds =Object.keys(allGroceries.data)
         const groceries=groceryIds.map(groceryId=>{
@@ -60,10 +63,7 @@ class AuthProvider extends React.Component{
             }
         })
         this.setAllGroceries(groceries)
-        console.log(groceries)
-
-        //----------------------Get all groceries and save on  constant-------------------------------------------------------------------
-
+        // console.log(groceries)
         //-------------------------------------------------------------------------------------------------------------------------------------
 
 

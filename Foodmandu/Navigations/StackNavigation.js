@@ -27,6 +27,7 @@ import AllGroceries from '../Components/CategoryProductList/AllGroceries';
 import AllBakeries from '../Components/CategoryProductList/AllBakeries';
 import AddRestaurant from '../Components/AddProductScreens/AddRestaurant';
 import AddGroceries from '../Components/AddProductScreens/AddGroceries';
+import MapScreen from '../Screens/ButtonTabs/MapScreen';
 
 
 
@@ -113,7 +114,8 @@ const AccountNavigation =()=>{
 const MoreNavigation =()=>{
     return(
         <Stack.Navigator>
-            <Stack.Screen name='More' component={MoreScreen}/>
+            {/*<Stack.Screen name='More' component={MoreScreen}/>*/}
+            <Stack.Screen name='More' component={MapScreen}/>
         </Stack.Navigator>
     )
 }
