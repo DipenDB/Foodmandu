@@ -8,25 +8,29 @@ import * as ImagePicker from 'react-native-image-picker'
 
 const BasketScreen=()=>{
 
-    const [selectedImage,setSelectedImage] = React.useState('')
+    const [selectedImage,setSelectedImage] = React.useState([])
+    console.log(selectedImage)
 
-    // console.log(selectedImage)
+
+
+    const renderItem =({item})=>{
+        // console.log(item.uri)
+        return(
+            <TouchableOpacity onPress={()=>handelDelete({uri: item.uri})} style={{flexDirection:'row',width:100,height:150,backgroundColor:'red',margin:10,}}>
+                <Image
+                    style={{height:"100%",width:"100%",}}
+                    // source={item.uri}
+                    source={{uri: item.uri}}
+                />
+            </TouchableOpacity>
+        )
+    }
 
     const handelDelete=({uri})=>{
+        // console.log(uri)
         setSelectedImage(selectedImage.filter(image=>image!=uri))
     }
 
-    const renderItem =({uri})=>{
-        console.log(uri)
-        return(
-            <View onPress={()=>handelDelete(uri)} style={{flexDirection:'row',width:200,height:300,backgroundColor:'dark'}}>
-                <Image
-                    style={{height:"100%",width:"100%",}}
-                    source={uri}
-                />
-            </View>
-        )
-    }
 
 
     return(
@@ -61,14 +65,15 @@ const BasketScreen=()=>{
                             if (selectedIndex==0){
                             //    Choose from gallery
                                 ImagePicker.launchImageLibrary({
+                                        multiple: true,
                                     mediaType:'photo',
                                     quality:1,
                                     maxWidth:200,
                                     maxHeight:300,
-                                    includeBase64:true,
+                                    // includeBase64:true,
                                 },
                                     (response)=>{
-                                        // console.log(response)
+                                        console.log(response)
                                         // setSelectedImage({uri:response.uri})
                                         setSelectedImage([...selectedImage,{uri:response.uri}])
                                     }
@@ -83,7 +88,9 @@ const BasketScreen=()=>{
                                     includeBase64:true,
                                 },(response)=>{
                                     // console.log(response)
-                                    setSelectedImage({uri:response.uri})
+                                    // setSelectedImage({uri:response.uri})
+                                    setSelectedImage([...selectedImage,{uri:response.uri}])
+
                                 })
                             }
 
@@ -94,21 +101,22 @@ const BasketScreen=()=>{
             </Button>
 
 
-            <View style={{width:200,height:300,backgroundColor:'dark'}}>
-                <Image
-                    style={{height:"100%",width:"100%",}}
-                    source={selectedImage}
+            {/*<View style={{width:200,height:300,backgroundColor:'dark'}}>*/}
+            {/*    <Image*/}
+            {/*        style={{height:"100%",width:"100%",}}*/}
+            {/*        source={selectedImage}*/}
+            {/*    />*/}
+            {/*</View>*/}
+
+
+
+                <FlatList
+                    data={selectedImage}
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                    renderItem={renderItem}
+                    keyExtractor={item => item.uri}
                 />
-            </View>
-
-
-
-                {/*<FlatList*/}
-                {/*    data={selectedImage}*/}
-
-                {/*    renderItem={renderItem}*/}
-                {/*    keyExtractor={item => item.uri}*/}
-                {/*/>*/}
 
 
         </View>

@@ -13,7 +13,7 @@ const MapScreen=()=>{
             },
             title: "Best Place",
             description: "This is the best place in Portland",
-            image: require('../../Assets/rest1.jpg')
+            image: require('../../../Assets/rest1.jpg')
         },
         {
             coordinates: {
@@ -22,7 +22,7 @@ const MapScreen=()=>{
             },
             title: "Second Best Place",
             description: "This is the second best place in Portland",
-            image: require('../../Assets/rest2.jpg')
+            image: require('../../../Assets/rest2.jpg')
         },
         {
             coordinates: {
@@ -31,7 +31,7 @@ const MapScreen=()=>{
             },
             title: "Third Best Place",
             description: "This is the third best place in Portland",
-            image: require('../../Assets/rest3.jpg')
+            image: require('../../../Assets/rest3.jpg')
         },
 
     ]

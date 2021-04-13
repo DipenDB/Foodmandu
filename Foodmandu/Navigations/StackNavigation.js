@@ -27,7 +27,11 @@ import AllGroceries from '../Components/CategoryProductList/AllGroceries';
 import AllBakeries from '../Components/CategoryProductList/AllBakeries';
 import AddRestaurant from '../Components/AddProductScreens/AddRestaurant';
 import AddGroceries from '../Components/AddProductScreens/AddGroceries';
-import MapScreen from '../Screens/ButtonTabs/MapScreen';
+import MapScreen from '../Screens/ButtonTabs/Maps/MapScreen';
+import TrackingLocation from '../Screens/ButtonTabs/Maps/TrackingLocation';
+import LocationTracking2 from '../Screens/ButtonTabs/Maps/LocationTracking2';
+import NewScreen from '../Screens/ButtonTabs/LocationsPolygonCarousel';
+import LocationsPolygonCarousel from '../Screens/ButtonTabs/LocationsPolygonCarousel';
 
 
 
@@ -114,8 +118,13 @@ const AccountNavigation =()=>{
 const MoreNavigation =()=>{
     return(
         <Stack.Navigator>
-            {/*<Stack.Screen name='More' component={MoreScreen}/>*/}
-            <Stack.Screen name='More' component={MapScreen}/>
+            {/*<Stack.Screen name='More' component={MapScreen}/>*/}
+            {/*<Stack.Screen name='More' component={TrackingLocation}/>*/}
+            {/*<Stack.Screen name='More' component={LocationTracking2}/>*/}
+
+            <Stack.Screen name='More' component={LocationsPolygonCarousel}/>
+
+
         </Stack.Navigator>
     )
 }
